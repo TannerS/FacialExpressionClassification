@@ -33,11 +33,10 @@ print('After pre-processing, X_test size: ', test_data.shape)
 model = Sequential()
 drop_out_rate = 0.5
 
-############### START FIRST CONVOLUTIONAL LAYER (3) + MAX POOLING (1) ###############
 
 
 model.add(convolutional.Conv2D(
-    filters=16,
+    filters=32,
     kernel_size=(2,2),
     strides=(1, 1),
     padding='same',
@@ -45,27 +44,20 @@ model.add(convolutional.Conv2D(
     activation='relu',
 ))
 
+# model.add(pooling.MaxPooling2D(
+#     pool_size=(2, 2),
+#     padding='same',
+# ))
+
 
 model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
+    filters=32,
+    kernel_size=(4,4),
     strides=(1, 1),
     padding='same',
     # input_shape=(1,48,48),
-    # activation='relu',
+    activation='relu',
 ))
-
-model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
-    strides=(1, 1),
-    padding='same',
-    # input_shape=(1,48,48),
-    # activation='relu',
-))
-
-# model.add(Activation('relu'))
-
 model.add(pooling.MaxPooling2D(
     pool_size=(2, 2),
     padding='same',
@@ -73,21 +65,10 @@ model.add(pooling.MaxPooling2D(
 
 
 
-############### START SECOND CONVOLUTIONAL LAYER (3) + MAX POOLING (1) ###############
 
 
 model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
-    strides=(1, 1),
-    padding='same',
-    # input_shape=(1,48,48),
-    # activation='relu',
-))
-
-
-model.add(convolutional.Conv2D(
-    filters=16,
+    filters=64,
     kernel_size=(2,2),
     strides=(1, 1),
     padding='same',
@@ -95,16 +76,19 @@ model.add(convolutional.Conv2D(
     activation='relu',
 ))
 
+# model.add(pooling.MaxPooling2D(
+#     pool_size=(2, 2),
+#     padding='same',
+# ))
+
 model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
+    filters=64,
+    kernel_size=(4,4),
     strides=(1, 1),
     padding='same',
     # input_shape=(1,48,48),
-    # activation='relu',
+    activation='relu',
 ))
-
-# model.add(Activation('relu'))
 
 model.add(pooling.MaxPooling2D(
     pool_size=(2, 2),
@@ -112,83 +96,55 @@ model.add(pooling.MaxPooling2D(
 ))
 
 
-############### START THIRD CONVOLUTIONAL LAYER (3) + MAX POOLING (1) ###############
-
-model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
-    strides=(1, 1),
-    padding='same',
-    # input_shape=(1,48,48),
-    # activation='relu',
-))
 
 
-model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
-    strides=(1, 1),
-    padding='same',
-    # input_shape=(1,48,48),
-    # activation='relu',
-))
 
-model.add(convolutional.Conv2D(
-    filters=16,
-    kernel_size=(2,2),
-    strides=(1, 1),
-    padding='same',
-    # input_shape=(1,48,48),
-    # activation='relu',
-))
-
-# model.add(Activation('relu'))
-
-model.add(pooling.MaxPooling2D(
-    pool_size=(2, 2),
-    padding='same',
-))
-
-############### END CONVOLUTIONAL LAYER (3) + MAX POOLING (1) ###############
 
 
 model.add(Flatten())
 
-############### START FIRST FULLY CONNECTED LAYER ###############
 
-model.add(Dense(1024))
+model.add(Dense(512))
 model.add(Activation('relu'))
 model.add(Dropout(drop_out_rate))
+
+# model.add(Dense(512))
+# model.add(Activation('relu'))
+# model.add(Dropout(drop_out_rate))
+
+
 
 ############### SECOND FIRST FULLY CONNECTED LAYER ###############
 
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(Dropout(drop_out_rate))
+# model.add(Dense(500))
+# model.add(Activation('relu'))
+# model.add(Dropout(drop_out_rate))
 
 ############### THIRD FIRST FULLY CONNECTED LAYER ###############
-
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(Dropout(drop_out_rate))
-
-############### FOURTH FIRST FULLY CONNECTED LAYER ###############
-
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(Dropout(drop_out_rate))
-
-############### FOURTH FIRST FULLY CONNECTED LAYER ###############
-
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(Dropout(drop_out_rate))
+#
+# model.add(Dense(256))
+# model.add(Activation('relu'))
+# model.add(Dropout(drop_out_rate))
+#
+# ############### FOURTH FIRST FULLY CONNECTED LAYER ###############
+#
+# model.add(Dense(256))
+# model.add(Activation('relu'))
+# model.add(Dropout(drop_out_rate))
 
 ############### FOURTH FIRST FULLY CONNECTED LAYER ###############
 
-model.add(Dense(1024))
-model.add(Activation('relu'))
-model.add(Dropout(drop_out_rate))
+# model.add(Dense(1024))
+# model.add(Activation('relu'))
+# # model.add(Dropout(drop_out_rate))
+#
+# ############### FOURTH FIRST FULLY CONNECTED LAYER ###############
+#
+# model.add(Dense(1024))
+# model.add(Activation('relu'))
+# # model.add(Dropout(drop_out_rate))
+
+
 
 ############### FIFTH FIRST FULLY CONNECTED LAYER ###############
 
@@ -197,18 +153,22 @@ model.add(Activation('softmax'))
 
 ############### END FULLY CONNECTED LAYER ###############
 
-# adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 
 model.compile(
-    # optimizer = adam,
-    optimizer = 'adam',
+    optimizer = adam,
+    # optimizer = 'adam',
     loss='categorical_crossentropy',
     metrics=['accuracy']
 )
 
 # model.fit(train_data, train_targets,epochs=10,batch_size=32,verbose=2)
-model.fit(train_data, train_targets, validation_split=0.20, epochs=30, batch_size=128, verbose=2)
+model.fit(train_data, train_targets, validation_split=0.2, epochs=50, batch_size=36, verbose=2)
 
+
+
+
+# model.
 # loss, accuracy = model.evaluate(test_data, test_target, verbose=2)
 # print('test loss:', loss)
 # print('test accuracy', accuracy)
