@@ -80,6 +80,37 @@ model.add(convolutional.Conv2D(
     strides=(1, 1),
     activation='relu'
 ))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=32,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=32,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=32,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+model.add(BatchNormalization())
+model.add(Dropout(.1))
+
 # create a max pooling layer for 2 dimensions
 model.add(pooling.MaxPooling2D(
     pool_size=(2, 2),
@@ -109,6 +140,36 @@ model.add(convolutional.Conv2D(
     strides=(1, 1),
     activation='relu'
 ))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=64,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=64,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+model.add(convolutional.Conv2D(
+    filters=64,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+model.add(BatchNormalization())
+model.add(Dropout(.1))
+
 # create a max pooling layer for 2 dimensions
 model.add(pooling.MaxPooling2D(
     pool_size=(2, 2),
@@ -138,6 +199,38 @@ model.add(convolutional.Conv2D(
     strides=(1, 1),
     activation='relu'
 ))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=128,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=128,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+# create a convolutional layer for 2 dimensions
+model.add(convolutional.Conv2D(
+    filters=128,
+    kernel_size=(2, 2),
+    padding='same',
+    strides=(1, 1),
+    activation='relu'
+))
+
+model.add(BatchNormalization())
+model.add(Dropout(.1))
+
+
 # create a max pooling layer for 2 dimensions
 model.add(pooling.MaxPooling2D(
     pool_size=(2, 2),
@@ -145,12 +238,18 @@ model.add(pooling.MaxPooling2D(
 ))
 # flatten the model's layer into a deep neuron which in turn, will be part of the fully connected feedforward network
 model.add(Flatten())
+# create dorpout layer to help with overfitting
+model.add(Dropout(.5))
 # create a single deep layer with a depth of 1024 for the output space
 model.add(Dense(1024))
 # choosing this as the activation type
 model.add(Activation('relu'))
-# last layer is the softmax layer to et the probability of each class
+# create dorpout layer to help with overfitting
+model.add(Dropout(.2))
+# last layer is the softmax layer to get the probability of each class
 model.add(Dense(3, activation='softmax'))
+
+
 
 
 
@@ -185,18 +284,18 @@ print('test accuracy', accuracy)
 
 
 
-# Show the image of one testing example
-# get random number within range of the test data
-temp = np.random.randint(test_data.shape[0], size=1)
-# Get its prediction
-output = model.predict(test_data[temp[0]].reshape(-1,1, 48, 48))
-# output prediction
-print(output)
-# create new figure using matplotlib
-plt.figure()
-# display and plot image
-plt.xticks(np.arange(output.shape[1]))
-plt.plot(np.arange(output.shape[1]), output.T)
+# # Show the image of one testing example
+# # get random number within range of the test data
+# temp = np.random.randint(test_data.shape[0], size=1)
+# # Get its prediction
+# output = model.predict(test_data[temp[0]].reshape(-1,1, 48, 48))
+# # output prediction
+# print(output)
+# # create new figure using matplotlib
+# plt.figure()
+# # display and plot image
+# plt.xticks(np.arange(output.shape[1]))
+# plt.plot(np.arange(output.shape[1]), output.T)
 
 
 
